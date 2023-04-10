@@ -1,7 +1,7 @@
 import React, {useMemo} from 'react';
 import './App.css';
 import {Canvas} from '@react-three/fiber';
-import {Scene} from "./components/scene";
+import {Scene} from "./components/Scene";
 import {Container} from "@mui/material";
 
 function App() {
@@ -13,6 +13,7 @@ function App() {
   return (
     <main>
         <Canvas
+            shadows
             frameloop="always"
             camera={{ position: [-distance, distance, distance] }}
         >

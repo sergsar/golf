@@ -1,17 +1,15 @@
 import React from 'react';
 import {OrbitControls} from "@react-three/drei";
-import {useFrame} from "@react-three/fiber";
+import {Effects} from "./Effects";
+import {TestGeometry} from "./TestGeometry";
 
 export const Scene: React.FC = () => {
     return (
         <>
-            <ambientLight intensity={0.1} />
-            <pointLight intensity={2} position={[0, 0, 5]} />
+            <directionalLight position={[2.5, 5, 5]} castShadow />
             <gridHelper visible={false} args={[50, 25]} />
-            <mesh>
-                <boxGeometry />
-                <meshStandardMaterial />
-            </mesh>
+            <TestGeometry />
+            <Effects />
             <OrbitControls
                 maxDistance={35}
                 minDistance={5}
