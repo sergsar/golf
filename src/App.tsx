@@ -6,7 +6,7 @@ import {Container} from "@mui/material";
 
 function App() {
   const distance = useMemo(
-      () => (window.innerWidth > window.innerHeight ? 10 : 20),
+      () => (window.innerWidth > window.innerHeight ? 100 : 200),
       []
   )
 
@@ -15,7 +15,7 @@ function App() {
         <Canvas
             shadows
             frameloop="always"
-            camera={{ position: [-distance, distance, distance] }}
+            camera={{ position: [-distance, distance, distance], fov: 50 }}
         >
             <Scene />
         </Canvas>
