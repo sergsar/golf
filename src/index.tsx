@@ -3,13 +3,23 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {Container, CssBaseline} from '@mui/material';
+import {RecoilRoot} from "recoil";
+import {ErrorBoundary} from "react-error-boundary";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <CssBaseline />
+    <RecoilRoot>
+        <ErrorBoundary fallback={<h1>Sorry.. there was an error</h1>}>
+            <React.Suspense fallback={<h1>Loading..</h1>}>
+                <App />
+            </React.Suspense>
+        </ErrorBoundary>
+    </RecoilRoot>
   </React.StrictMode>
 );
 
