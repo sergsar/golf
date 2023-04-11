@@ -11,6 +11,7 @@ export const Scene: React.FC = () => {
             <gridHelper visible={false} args={[50, 25]} />
             <Field />
             <Effects />
+            <TestGeometry />
             <OrbitControls
                 maxDistance={300}
                 minDistance={5}

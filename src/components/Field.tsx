@@ -11,7 +11,6 @@ export const Field: React.FC = () => {
                 return
             }
             object.receiveShadow = true
-            object.castShadow = true
         })
     }, [fbx])
 
