@@ -1,18 +1,25 @@
 import React from 'react';
-import {OrbitControls} from "@react-three/drei";
-import {Effects} from "./Effects";
-import {TestGeometry} from "./TestGeometry";
-import {Field} from "./Field";
+import {OrbitControls} from '@react-three/drei';
+import {Effects} from './Effects';
+import {TestGeometry} from './TestGeometry';
+import {Field} from './Field';
+import {Stage} from './Stage';
 
 export const Scene: React.FC = () => {
     return (
         <>
-            <directionalLight position={[2.5, 5, 5]} castShadow />
-            <gridHelper visible={false} args={[50, 25]} />
-            <Field />
-            <Effects />
+            <Stage
+                preset="straight"
+                intensity={1}
+                environment="city"
+                adjustCamera
+            >
+                <Field />
+            </Stage>
             <TestGeometry />
+            {/*<Effects />*/}
             <OrbitControls
+                makeDefault
                 maxDistance={300}
                 minDistance={5}
                 zoomSpeed={1}
