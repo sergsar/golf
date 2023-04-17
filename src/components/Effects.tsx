@@ -27,14 +27,14 @@ export const Effects: React.FC<{ disabled?: boolean | number }> = ({ disabled  }
                 luminanceThreshold={0.2} // luminance threshold. Raise this value to mask out darker elements in the scene.
                 // luminanceSmoothing={0.025} // smoothness of the luminance threshold. Range is [0, 1]
             />
-            <BrightnessContrast
-                brightness={-0.05} // brightness. min: -1, max: 1
-                contrast={0.15} // contrast: min -1, max: 1
-            />
             <HueSaturation
                 blendFunction={BlendFunction.NORMAL} // blend mode
                 hue={0} // hue in radians
                 saturation={-0.15} // saturation in radians
+            />
+            <BrightnessContrast
+                brightness={-0.05} // brightness. min: -1, max: 1
+                contrast={0.15} // contrast: min -1, max: 1
             />
             <SSAO
                 intensity={70}
