@@ -1,19 +1,35 @@
 import React, {useEffect} from 'react';
-import {useFBX} from '@react-three/drei';
-import {Mesh} from 'three';
+import {useFBX, useTexture} from '@react-three/drei';
+import {Mesh, MeshPhongMaterial, sRGBEncoding} from 'three';
 
 export const Field: React.FC = () => {
     const fbx = useFBX('fbx/field-mesh.fbx')
+    const texture = useTexture('textures/bake-shade.png')
 
     useEffect(() => {
+        (texture as any).channel = 1
+        texture.encoding = sRGBEncoding
+        texture.needsUpdate = true
         fbx.traverse((object) => {
             if (!(object instanceof Mesh)) {
                 return
             }
-            // object.material.wireframe = true
+            if (object.material instanceof Array<MeshPhongMaterial>) {
+                object.material.forEach((material: MeshPhongMaterial) => {
+
+                    material.shininess = 0
+                    material.specular.set('#000')
+                    material.color.set('#ffffff')
+                    material.emissive.set('#000')
+                    material.map = texture
+
+
+                    // material.wireframe = true
+                })
+            }
             object.receiveShadow = true
         })
-    }, [fbx])
+    }, [fbx, texture])
 
     return (
         <>

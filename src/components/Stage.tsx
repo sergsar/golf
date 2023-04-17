@@ -13,6 +13,7 @@ import {CameraHelper, DirectionalLight, Group, Object3D, Vector3} from 'three';
 import {CSM} from "./CSM";
 
 // TODO: Refactor and remove useless, replace environment map
+// TODO: Look the final picture and decide to use simple or CSM shadows
 
 const presetsObj = {
     sunset: 'venice/venice_sunset_1k.hdr',
@@ -31,7 +32,7 @@ type PresetsType = keyof typeof presetsObj
 
 const presets = {
     straight: {
-        main: [0.5, 0.5, 0.5],
+        main: [0.2, 0.75, 0.2],
         fill: [-1, -0.5, -1],
     },
     rembrandt: {
@@ -136,29 +137,29 @@ export const Stage = ({
             return
         }
 
-        const helper = new CameraHelper(directionalLight.current.shadow.camera)
-        directionalLight.current.parent?.add(helper)
+        // const helper = new CameraHelper(directionalLight.current.shadow.camera)
+        // directionalLight.current.parent?.add(helper)
     }, [directionalLight, radius])
 
     return (
         <>
-            {/*<CSM lightIntensity={intensity}/>*/}
+            <CSM lightIntensity={intensity} lightDirection={config?.main}/>
             {/*<SoftShadows />*/}
-            <directionalLight
-                ref={directionalLight}
-                position={directLightPosition}
-                target={target.current as Object3D}
-                intensity={intensity * 2}
-                castShadow={!!shadows}
-                shadow-camera-far={shadowFar}
-                shadow-camera-top={radius}
-                shadow-camera-bottom={-radius}
-                shadow-camera-right={radius}
-                shadow-camera-left={-radius}
-                shadow-bias={shadowBias}
-                shadow-normalBias={normalBias}
-                shadow-mapSize={shadowSize}
-            />
+            {/*<directionalLight*/}
+            {/*    ref={directionalLight}*/}
+            {/*    position={directLightPosition}*/}
+            {/*    target={target.current as Object3D}*/}
+            {/*    intensity={intensity * 2}*/}
+            {/*    castShadow={!!shadows}*/}
+            {/*    shadow-camera-far={shadowFar}*/}
+            {/*    shadow-camera-top={radius}*/}
+            {/*    shadow-camera-bottom={-radius}*/}
+            {/*    shadow-camera-right={radius}*/}
+            {/*    shadow-camera-left={-radius}*/}
+            {/*    shadow-bias={shadowBias}*/}
+            {/*    shadow-normalBias={normalBias}*/}
+            {/*    shadow-mapSize={shadowSize}*/}
+            {/*/>*/}
             <group ref={target} position={directLightTarget} />
             <ambientLight intensity={intensity / 3} />
             <pointLight

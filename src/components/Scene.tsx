@@ -4,6 +4,7 @@ import {Effects} from './Effects';
 import {TestGeometry} from './TestGeometry';
 import {Field} from './Field';
 import {Stage} from './Stage';
+import {Trees} from './Trees';
 
 export const Scene: React.FC = () => {
     return (
@@ -15,13 +16,15 @@ export const Scene: React.FC = () => {
                 adjustCamera
             >
                 <Field />
+                <Trees />
             </Stage>
             <TestGeometry />
-            {/*<Effects />*/}
+            <Effects disabled={0} />
             <OrbitControls
                 makeDefault
                 maxDistance={300}
                 minDistance={5}
+                maxPolarAngle={Math.PI * 0.45}
                 zoomSpeed={1}
                 dampingFactor={1}
             />

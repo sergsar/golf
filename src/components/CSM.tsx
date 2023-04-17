@@ -5,10 +5,12 @@ import {useFrame, useThree} from '@react-three/fiber';
 
 type CSMProps = {
     lightIntensity?: number
+    lightDirection?: number[]
 }
 
 export const CSM: React.FC<CSMProps> = ({
-    lightIntensity = 1
+    lightIntensity = 1,
+    lightDirection = [1, -1, 1]
 }) => {
     const { scene, camera } = useThree()
     const [csm, setCsm] = useState<ThreeCSM>()
@@ -25,7 +27,7 @@ export const CSM: React.FC<CSMProps> = ({
             maxFar: 300,
             cascades,
             shadowMapSize: 1024,
-            lightDirection: new Vector3(1, -1, 1).normalize(),
+            lightDirection: new Vector3(...lightDirection).multiplyScalar(-1).normalize(),
             lightIntensity: lightIntensity / cascades,
             camera: camera,
             parent: scene
@@ -46,7 +48,7 @@ export const CSM: React.FC<CSMProps> = ({
         if (helper) {
             scene.remove(helper)
         }
-        setHelper(new CSMHelper(csm))
+        // setHelper(new CSMHelper(csm))
     }, [csm])
 
     useEffect(() => {
