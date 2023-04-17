@@ -6,11 +6,13 @@ import {useFrame, useThree} from '@react-three/fiber';
 type CSMProps = {
     lightIntensity?: number
     lightDirection?: number[]
+    cascades?: number
 }
 
 export const CSM: React.FC<CSMProps> = ({
     lightIntensity = 1,
-    lightDirection = [1, -1, 1]
+    lightDirection = [1, -1, 1],
+    cascades = 4
 }) => {
     const { scene, camera } = useThree()
     const [csm, setCsm] = useState<ThreeCSM>()
@@ -20,8 +22,6 @@ export const CSM: React.FC<CSMProps> = ({
             console.warn('dispose CSM: ', csm)
             csm.dispose()
         }
-
-        const cascades = 4
 
         setCsm(new ThreeCSM({
             maxFar: 300,

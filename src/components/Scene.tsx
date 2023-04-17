@@ -1,25 +1,27 @@
 import React from 'react';
 import {OrbitControls} from '@react-three/drei';
 import {Effects} from './Effects';
-import {TestGeometry} from './TestGeometry';
 import {Field} from './Field';
 import {Stage} from './Stage';
 import {Trees} from './Trees';
+import {Carts} from './Carts';
 
 export const Scene: React.FC = () => {
+
+
     return (
         <>
             <Stage
                 preset="straight"
                 intensity={1}
-                environment="city"
+                environment="park"
                 adjustCamera
             >
                 <Field />
                 <Trees />
+                <Carts />
             </Stage>
-            <TestGeometry />
-            <Effects disabled={0} />
+            <Effects disabled={0} ssao={0} />
             <OrbitControls
                 makeDefault
                 maxDistance={300}

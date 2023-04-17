@@ -143,8 +143,8 @@ export const Stage = ({
 
     return (
         <>
-            <CSM lightIntensity={intensity} lightDirection={config?.main}/>
             {/*<SoftShadows />*/}
+            <CSM lightIntensity={intensity} lightDirection={config?.main} cascades={5}/>
             {/*<directionalLight*/}
             {/*    ref={directionalLight}*/}
             {/*    position={directLightPosition}*/}

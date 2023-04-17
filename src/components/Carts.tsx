@@ -2,8 +2,8 @@ import React, {useEffect} from 'react';
 import {useFBX} from '@react-three/drei';
 import {BufferGeometry, Mesh, MeshPhongMaterial, sRGBEncoding} from 'three';
 
-export const Trees: React.FC = () => {
-    const fbx = useFBX('fbx/trees.fbx')
+export const Carts: React.FC = () => {
+    const fbx = useFBX('fbx/carts.fbx')
 
     useEffect(() => {
         const geometry: { [key: string]: BufferGeometry } = {}
@@ -35,7 +35,7 @@ export const Trees: React.FC = () => {
 
                         material.shininess = 0
                         material.specular.set('#000')
-                        material.color.set('#ffffff')
+                        // material.color.set('#ffffff')
                         material.emissive.set('#000')
 
                         if (material.map) {
@@ -60,6 +60,7 @@ export const Trees: React.FC = () => {
             })
             object.castShadow = true
         })
+        console.log('materialSet: ', materialSet)
     }, [fbx])
 
     return (
