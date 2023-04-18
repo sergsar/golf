@@ -32,7 +32,7 @@ export const Effects: React.FC<EffectsProps> = ({ disabled, ssao  }) => {
                 contrast={0.3} // contrast: min -1, max: 1
             />
             {ssao ? <SSAO
-                intensity={11}
+                intensity={15}
                 color={'#000000'}
                 blendFunction={BlendFunction.MULTIPLY} // blend mode
                 samples={15} // amount of samples per pixel (shouldn't be a multiple of the ring count)

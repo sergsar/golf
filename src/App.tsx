@@ -14,7 +14,7 @@ function App() {
     return (
       <Canvas
         gl={{
-            antialias: false,
+            antialias: true,
             toneMapping: ReinhardToneMapping,
             outputEncoding: sRGBEncoding,
         }}
