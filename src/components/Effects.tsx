@@ -3,7 +3,7 @@ import {
     Bloom,
     BrightnessContrast,
     EffectComposer,
-    HueSaturation,
+    HueSaturation, SMAA,
     SSAO
 } from '@react-three/postprocessing';
 import {BlendFunction, KernelSize, Resolution} from 'postprocessing';
@@ -21,7 +21,7 @@ export const Effects: React.FC<EffectsProps> = ({ disabled, ssao  }) => {
     }
 
     return (
-        <EffectComposer >
+        <EffectComposer multisampling={0} >
             <HueSaturation
                 blendFunction={BlendFunction.NORMAL} // blend mode
                 hue={0} // hue in radians
@@ -31,6 +31,7 @@ export const Effects: React.FC<EffectsProps> = ({ disabled, ssao  }) => {
                 brightness={0.1} // brightness. min: -1, max: 1
                 contrast={0.3} // contrast: min -1, max: 1
             />
+            <SMAA />
             {ssao ? <SSAO
                 intensity={11}
                 color={'#000000'}
@@ -47,7 +48,7 @@ export const Effects: React.FC<EffectsProps> = ({ disabled, ssao  }) => {
                 bias={0.05} // occlusion bias
             /> : <></>}
             <Bloom
-                intensity={0.4} // The bloom intensity.
+                intensity={0.6} // The bloom intensity.
                 // @ts-ignore
                 blurPass={undefined} // A blur pass.
                 width={Resolution.AUTO_SIZE}  // render width

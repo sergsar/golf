@@ -2,8 +2,8 @@ import React, {useEffect} from 'react';
 import {useFBX} from '@react-three/drei';
 import {prepareObject} from '../utils/mesh';
 
-export const Trees: React.FC = () => {
-    const fbx = useFBX('fbx/trees.fbx')
+export const Flags: React.FC = () => {
+    const fbx = useFBX('fbx/flags.fbx')
 
     useEffect(() => {
         prepareObject({

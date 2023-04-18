@@ -3,7 +3,14 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {CssBaseline} from '@mui/material';
+import {createTheme, CssBaseline, ThemeOptions, ThemeProvider} from '@mui/material';
+import {Loading} from './components/Loading';
+
+const themeOptions: ThemeOptions = {
+    typography: {
+        fontFamily: 'Poppins, sans-serif'
+    }
+}
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -11,8 +18,10 @@ const root = ReactDOM.createRoot(
 root.render(
   <StrictMode>
     <CssBaseline />
-    <Suspense fallback={<h1>Loading..</h1>}>
-      <App />
+    <Suspense fallback={<Loading />}>
+      <ThemeProvider theme={createTheme(themeOptions)}>
+          <App />
+      </ThemeProvider>
     </Suspense>
   </StrictMode>
 );

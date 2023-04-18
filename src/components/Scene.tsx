@@ -5,6 +5,7 @@ import {Field} from './Field';
 import {Stage} from './Stage';
 import {Trees} from './Trees';
 import {Carts} from './Carts';
+import {Flags} from './Flags';
 
 export const Scene: React.FC = () => {
 
@@ -20,6 +21,7 @@ export const Scene: React.FC = () => {
                 <Field />
                 <Trees />
                 <Carts />
+                <Flags />
             </Stage>
             <Effects disabled={0} ssao={0} />
             <OrbitControls
