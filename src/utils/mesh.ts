@@ -1,8 +1,59 @@
-import {BufferGeometry, Group, Mesh, MeshPhongMaterial, sRGBEncoding} from 'three';
+import {
+    BufferGeometry,
+    Group, InstancedMesh,
+    Material, Matrix4,
+    Mesh,
+    MeshPhongMaterial,
+    sRGBEncoding,
+    Texture
+} from 'three';
 
 type PrepareObjectParams = {
     group: Group,
     castShadow?: boolean
+    onMaterial?: (material: Material) => void
+}
+
+export const makeInstanced = ({ group, castShadow, onMaterial }: PrepareObjectParams) => {
+    const matrices: { [key: string]: Matrix4[] } = {}
+    const geometry: { [key: string]: BufferGeometry } = {}
+    const materials: { [key: string]: Material | Material[] } = {}
+    group.traverse((object) => {
+        if (!(object instanceof Mesh)) {
+            return
+        }
+        console.log('mesh: ', object)
+        if (!geometry[object.geometry.name]) {
+            geometry[object.geometry.name] = object.geometry
+            materials[object.geometry.name] = object.material
+            matrices[object.geometry.name] = []
+            onMaterial?.(object.material)
+            console.log('caching')
+        } else {
+            const geometryBuffer = object.geometry
+            const materialBuffer = object.material
+            object.geometry = geometry[object.geometry.name]
+            object.material = materials[object.geometry.name]
+            console.log('dispose')
+            if (!Object.values(materials).includes(materialBuffer)) {
+                disposeMaterial(materialBuffer)
+            }
+            geometryBuffer.dispose()
+        }
+        matrices[object.geometry.name].push(object.matrix)
+        object.castShadow = true
+    })
+
+    group.children = []
+    Object.entries(geometry).forEach(([key, value]) => {
+        const meshMatrices = matrices[key]
+        const material = materials[key]
+        const instanced = new InstancedMesh(value, material, meshMatrices.length)
+        instanced.castShadow = !!castShadow
+        group.add(instanced)
+        meshMatrices.forEach((matrix, index) => instanced.setMatrixAt(index, matrix))
+    })
+    console.log('geometry: ', geometry)
 }
 
 export const prepareObject = ({ group, castShadow }: PrepareObjectParams) => {
@@ -60,5 +111,35 @@ export const prepareObject = ({ group, castShadow }: PrepareObjectParams) => {
             }
         })
         object.castShadow = !!castShadow
+    })
+}
+
+export const prepareStandardMaterial = (material: Material) => {
+    if (!(material instanceof MeshPhongMaterial)) {
+        return
+    }
+    material.shininess = 0
+    material.specular.set('#000')
+    // material.color.set('#ffffff')
+    material.emissive.set('#000')
+
+    if (material.map) {
+        material.map.encoding = sRGBEncoding
+        material.map.needsUpdate = true
+        // material.map = null
+    }
+}
+
+const disposeMaterial = (material: Material | Material[]) => {
+    const materials = Array.isArray(material) ? material : [material]
+    materials.forEach((item) => {
+        const texture = (item as any).map
+        if (texture instanceof Texture) {
+            console.log('dispose texture: ', texture);
+            (item as any).map = null
+            texture.dispose()
+        }
+        console.log('dispose material: ', item);
+        item.dispose()
     })
 }

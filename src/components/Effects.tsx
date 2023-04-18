@@ -31,7 +31,6 @@ export const Effects: React.FC<EffectsProps> = ({ disabled, ssao  }) => {
                 brightness={0.1} // brightness. min: -1, max: 1
                 contrast={0.3} // contrast: min -1, max: 1
             />
-            <SMAA />
             {ssao ? <SSAO
                 intensity={11}
                 color={'#000000'}

@@ -52,7 +52,6 @@ export const CSM: React.FC<CSMProps> = ({
     }, [csm])
 
     useEffect(() => {
-        console.log('helper: ', helper)
         if (helper) {
             helper.visible = true
             scene.add(helper)

@@ -27,7 +27,7 @@ export const Scene: React.FC = () => {
             <OrbitControls
                 makeDefault
                 maxDistance={300}
-                minDistance={5}
+                minDistance={75}
                 maxPolarAngle={Math.PI * 0.45}
                 zoomSpeed={1}
                 dampingFactor={1}

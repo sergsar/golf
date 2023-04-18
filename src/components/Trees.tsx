@@ -1,14 +1,15 @@
 import React, {useEffect} from 'react';
 import {useFBX} from '@react-three/drei';
-import {prepareObject} from '../utils/mesh';
+import {makeInstanced, prepareStandardMaterial} from '../utils/mesh';
 
 export const Trees: React.FC = () => {
     const fbx = useFBX('fbx/trees.fbx')
 
     useEffect(() => {
-        prepareObject({
+        makeInstanced({
             group: fbx,
-            castShadow: true
+            castShadow: true,
+            onMaterial: prepareStandardMaterial
         })
     }, [fbx])
 

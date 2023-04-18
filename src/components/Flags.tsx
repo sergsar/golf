@@ -1,14 +1,14 @@
 import React, {useEffect} from 'react';
 import {useFBX} from '@react-three/drei';
-import {prepareObject} from '../utils/mesh';
+import {makeInstanced} from '../utils/mesh';
 
 export const Flags: React.FC = () => {
     const fbx = useFBX('fbx/flags.fbx')
 
     useEffect(() => {
-        prepareObject({
+        makeInstanced({
             group: fbx,
-            castShadow: true
+            castShadow: true,
         })
     }, [fbx])
 
