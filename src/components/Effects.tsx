@@ -3,7 +3,7 @@ import {
     Bloom,
     BrightnessContrast,
     EffectComposer,
-    HueSaturation, SMAA,
+    HueSaturation,
     SSAO
 } from '@react-three/postprocessing';
 import {BlendFunction, KernelSize, Resolution} from 'postprocessing';
@@ -15,13 +15,8 @@ type EffectsProps = {
 
 export const Effects: React.FC<EffectsProps> = ({ disabled, ssao  }) => {
 
-
-    if (disabled) {
-        return null
-    }
-
     return (
-        <EffectComposer multisampling={0} >
+        <EffectComposer multisampling={0}  enabled={!disabled} resolutionScale={1} >
             <HueSaturation
                 blendFunction={BlendFunction.NORMAL} // blend mode
                 hue={0} // hue in radians
