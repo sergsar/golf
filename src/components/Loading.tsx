@@ -1,5 +1,6 @@
 import {Box, Typography} from '@mui/material';
 import React from 'react';
+import Image from '../assets/img/loader-background.jpg'
 
 export const Loading = () => {
     return (
@@ -8,7 +9,7 @@ export const Loading = () => {
             component="div"
             display="flex"
             sx={{
-                backgroundImage: 'url(loader-background.jpg)',
+                backgroundImage: `url(${Image})`,
                 backgroundSize: 'cover',
             }}
         >
