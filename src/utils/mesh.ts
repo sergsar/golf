@@ -22,19 +22,16 @@ export const makeInstanced = ({ group, castShadow, onMaterial }: PrepareObjectPa
         if (!(object instanceof Mesh)) {
             return
         }
-        console.log('mesh: ', object)
         if (!geometry[object.geometry.name]) {
             geometry[object.geometry.name] = object.geometry
             materials[object.geometry.name] = object.material
             matrices[object.geometry.name] = []
             onMaterial?.(object.material)
-            console.log('caching')
         } else {
             const geometryBuffer = object.geometry
             const materialBuffer = object.material
             object.geometry = geometry[object.geometry.name]
             object.material = materials[object.geometry.name]
-            console.log('dispose')
             if (!Object.values(materials).includes(materialBuffer)) {
                 disposeMaterial(materialBuffer)
             }
@@ -53,7 +50,6 @@ export const makeInstanced = ({ group, castShadow, onMaterial }: PrepareObjectPa
         group.add(instanced)
         meshMatrices.forEach((matrix, index) => instanced.setMatrixAt(index, matrix))
     })
-    console.log('geometry: ', geometry)
 }
 
 export const prepareObject = ({ group, castShadow }: PrepareObjectParams) => {
@@ -135,11 +131,9 @@ const disposeMaterial = (material: Material | Material[]) => {
     materials.forEach((item) => {
         const texture = (item as any).map
         if (texture instanceof Texture) {
-            console.log('dispose texture: ', texture);
             (item as any).map = null
             texture.dispose()
         }
-        console.log('dispose material: ', item);
         item.dispose()
     })
 }

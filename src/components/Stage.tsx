@@ -8,7 +8,7 @@ import {
 } from '@react-three/drei'
 
 import {Center, CenterProps} from './Center'
-import {useEffect, useRef} from 'react';
+import {useEffect, useMemo, useRef} from 'react';
 import {CameraHelper, DirectionalLight, Group, Object3D, Vector3} from 'three';
 import {CSM} from "./CSM";
 
@@ -132,6 +132,8 @@ export const Stage = ({
     const directionalLight = useRef<DirectionalLight>(null)
     const target = useRef<Group>(null)
 
+    const margin = useMemo(() => window.innerWidth > window.innerHeight ? 0.7 : 0.6, [])
+
     useEffect(() => {
         if (!(directionalLight.current && radius)) {
             return
@@ -167,7 +169,7 @@ export const Stage = ({
                 intensity={intensity}
             />
 
-            <Bounds fit={!!adjustCamera} clip={!!adjustCamera} margin={Number(adjustCamera)} observe {...props}>
+            <Bounds fit={!!adjustCamera}  clip={!!adjustCamera} margin={margin} observe {...props}>
                 <Refit radius={radius} adjustCamera={adjustCamera} />
                 <Center
                     // used for lights positioning, centering is disabled

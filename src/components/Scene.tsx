@@ -6,9 +6,10 @@ import {Stage} from './Stage';
 import {Trees} from './Trees';
 import {Carts} from './Carts';
 import {Flags} from './Flags';
+import {useUpdateShadows} from '../hooks/useUpdateShadows';
 
 export const Scene: React.FC = () => {
-
+    useUpdateShadows()
 
     return (
         <>

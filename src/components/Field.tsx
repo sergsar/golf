@@ -9,6 +9,7 @@ export const Field: React.FC = () => {
     useEffect(() => {
         (texture as any).channel = 1
         texture.encoding = sRGBEncoding
+        texture.generateMipmaps = true
         texture.needsUpdate = true
         fbx.traverse((object) => {
             if (!(object instanceof Mesh)) {

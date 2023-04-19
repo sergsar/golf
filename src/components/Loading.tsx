@@ -23,7 +23,7 @@ export const Loading = () => {
                     backdropFilter: 'blur(10px) brightness(60%)'
                 }}
             >
-                <Typography color="white" variant="h5">Loading..</Typography>
+                <Typography fontWeight="600" color="white" variant="h5">Loading..</Typography>
             </Box>
         </Box>
     )
