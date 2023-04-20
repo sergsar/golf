@@ -7,10 +7,10 @@ import {Trees} from './Trees';
 import {Carts} from './Carts';
 import {Flags} from './Flags';
 import {useUpdateShadows} from '../hooks/useUpdateShadows';
+import {Isoline} from './Isoline';
 
 export const Scene: React.FC = () => {
     useUpdateShadows()
-
     return (
         <>
             <Stage
@@ -23,6 +23,7 @@ export const Scene: React.FC = () => {
                 <Trees />
                 <Carts />
                 <Flags />
+                <Isoline/>
             </Stage>
             <Effects disabled={0} ssao={0} />
             <OrbitControls

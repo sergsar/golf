@@ -28,6 +28,19 @@
   color: #61dafb;
 }
 
+.stats-item {
+  position: relative !important;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+}
+
+.stats-item canvas {
+  position: relative;
+  display: flex !important;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
