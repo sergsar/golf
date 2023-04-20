@@ -9,7 +9,6 @@ export const useUpdateShadows = () => {
     useFrame(() => {
         const length = Math.round(camera.position.lengthSq() * 0.0005)
         if (value.current !== length) {
-            console.log('update shadows')
             gl.shadowMap.needsUpdate = true
             value.current = length
         }
