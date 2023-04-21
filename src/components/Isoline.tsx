@@ -16,14 +16,14 @@ export const Isoline: React.FC = () => {
         if (!fbx) {
             return
         }
-
+        fbx.position.y += 1.5
         fbx.traverse((object) => {
             if (!(object instanceof Mesh)) {
                 return
             }
             if (object.material instanceof MeshPhongMaterial) {
                 object.material.transparent = true
-                object.material.depthTest = false
+                // object.material.depthTest = false
                 object.material.color.set('#a6a6a6')
             }
 
