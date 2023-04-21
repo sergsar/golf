@@ -1,4 +1,4 @@
-# Whatever Golf Course Interactive Visualization
+# Whatever Golf Course Interactive Visualisation
 
 ## React Three Fiber & Postprocessing
 
