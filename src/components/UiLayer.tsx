@@ -10,7 +10,7 @@ export const UiLayer = () => {
     return (
         <Box
             component="div"
-            sx={{ pointerEvents: 'none' }}
+            sx={{ pointerEvents: 'none', '> *': { pointerEvents: 'auto' } }}
             position="fixed"
             top="0"
             width="100%"
