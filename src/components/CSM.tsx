@@ -14,7 +14,8 @@ export const CSM: React.FC<CSMProps> = ({
     lightDirection = [1, -1, 1],
     cascades = 4
 }) => {
-    const { scene, camera } = useThree()
+    const scene = useThree((state) => state.scene)
+    const camera = useThree((state) => state.camera)
     const [csm, setCsm] = useState<ThreeCSM>()
     const [helper, setHelper] = useState<CSMHelper>()
     useEffect(() => {
