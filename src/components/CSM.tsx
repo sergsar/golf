@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {CSM as ThreeCSM, CSMHelper} from 'three-stdlib'
 import {Vector3} from 'three';
 import {useFrame, useThree} from '@react-three/fiber';
+import {useOnPositionUpdate} from "../hooks/useOnPositionUpdate";
 
 type CSMProps = {
     lightIntensity?: number
@@ -18,6 +19,11 @@ export const CSM: React.FC<CSMProps> = ({
     const camera = useThree((state) => state.camera)
     const [csm, setCsm] = useState<ThreeCSM>()
     const [helper, setHelper] = useState<CSMHelper>()
+
+    useOnPositionUpdate(() => {
+        csm?.update()
+    })
+
     useEffect(() => {
         if (csm) {
             console.warn('dispose CSM: ', csm)
@@ -64,9 +70,7 @@ export const CSM: React.FC<CSMProps> = ({
     }, [helper])
 
     useFrame(() => {
-        csm?.update()
         helper?.update()
-
     })
 
     return null

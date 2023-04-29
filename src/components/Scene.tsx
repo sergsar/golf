@@ -6,11 +6,14 @@ import {Stage} from './Stage';
 import {Trees} from './Trees';
 import {Carts} from './Carts';
 import {Flags} from './Flags';
-import {useUpdateShadows} from '../hooks/useUpdateShadows';
 import {Isoline} from './Isoline';
+import {useOnPositionUpdate} from "../hooks/useOnPositionUpdate";
+import {useThree} from "@react-three/fiber";
 
 export const Scene: React.FC = () => {
-    useUpdateShadows()
+    const gl = useThree((state) => state.gl)
+    useOnPositionUpdate(() => gl.shadowMap.needsUpdate = true)
+
     return (
         <>
             <Stage
