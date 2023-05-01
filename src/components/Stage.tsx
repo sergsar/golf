@@ -86,19 +86,6 @@ type StageProps = {
     center?: Partial<CenterProps>
 }
 
-type RefitProps = {
-    radius: number,
-    adjustCamera: number | boolean
-}
-
-const Refit: React.FC<RefitProps> = ({ radius, adjustCamera }) => {
-    const api = useBounds()
-    React.useEffect(() => {
-        if (adjustCamera) api.refresh().clip().fit()
-    }, [radius, adjustCamera])
-    return null
-}
-
 export const Stage = ({
   children,
   center,
@@ -169,8 +156,7 @@ export const Stage = ({
                 intensity={intensity}
             />
 
-            <Bounds fit={!!adjustCamera}  clip={!!adjustCamera} margin={margin} observe {...props}>
-                <Refit radius={radius} adjustCamera={adjustCamera} />
+            <Bounds fit={!!adjustCamera}  clip={false} margin={margin} observe {...props}>
                 <Center
                     // used for lights positioning, centering is disabled
                     {...center}
