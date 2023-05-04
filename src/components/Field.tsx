@@ -33,8 +33,8 @@ export const Field: React.FC = () => {
     }, [fbx, texture])
 
     return (
-        <>
+        <group name="field">
             <primitive object={fbx} />
-        </>
+        </group>
     )
 }
