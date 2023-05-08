@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {useFBX, useTexture} from '@react-three/drei';
-import {Mesh, MeshPhongMaterial, sRGBEncoding} from 'three';
+import {LinearFilter, LinearMipMapLinearFilter, Mesh, MeshPhongMaterial, sRGBEncoding} from 'three';
 
 export const Field: React.FC = () => {
     const fbx = useFBX('fbx/field-mesh.fbx')
@@ -10,6 +10,8 @@ export const Field: React.FC = () => {
         (texture as any).channel = 1
         texture.encoding = sRGBEncoding
         texture.generateMipmaps = true
+        texture.minFilter = LinearMipMapLinearFilter
+        texture.magFilter = LinearFilter
         texture.needsUpdate = true
         fbx.traverse((object) => {
             if (!(object instanceof Mesh)) {
