@@ -23,3 +23,22 @@ export const unprojectMatrixToLine = (matrix: Matrix4, event?: MouseEvent, domEl
 export const setUnprojectMatrix = (matrix: Matrix4, camera: Camera) => {
     matrix.copy(camera.matrixWorld).multiply(camera.projectionMatrixInverse)
 }
+
+export const checkMinMaxDistance = (point1: Vector3, point2: Vector3, delta: Vector3, min: number, max: number) => {
+    const distanceToTarget = point1
+        .clone().sub(point2).length()
+    const newDistanceToTarget = point1
+        .clone().add(delta).sub(point2).length()
+    const deltaDistance = newDistanceToTarget - distanceToTarget
+    return (deltaDistance > 0 && newDistanceToTarget < max) ||
+        (deltaDistance < 0 && newDistanceToTarget > min)
+}
+
+export const checkMaxDistance = (point1: Vector3, point2: Vector3, delta: Vector3, max: number) => {
+    const distanceToTarget = point1
+        .clone().sub(point2).length()
+    const newDistanceToTarget = point1
+        .clone().add(delta).sub(point2).length()
+    const deltaDistance = newDistanceToTarget - distanceToTarget
+    return (deltaDistance < 0 || newDistanceToTarget < max)
+}
