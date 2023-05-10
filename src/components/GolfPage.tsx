@@ -27,10 +27,10 @@ export const GolfPage = () => {
                     {/*<color attach="background" args={['pink']} />*/}
                     <Scene />
                 </Canvas>
-            </Suspense>
-            <Suspense fallback={<Loading />}>
-                <UiLayer />
-                <Delay value={500}/>
+                <Suspense fallback={<Loading />}>
+                    <UiLayer />
+                    <Delay value={500}/>
+                </Suspense>
             </Suspense>
         </>
     )
