@@ -1,17 +1,13 @@
-import React, {useEffect} from 'react';
-import {useFBX} from '@react-three/drei';
-import {makeInstanced, prepareStandardMaterial} from '../utils/mesh';
+import React from 'react';
+import {prepareStandardMaterial} from '../utils/mesh';
+import {useInstancedFbx} from '../hooks/useInstancedFbx';
 
 export const Carts: React.FC = () => {
-    const fbx = useFBX('fbx/carts.fbx')
-
-    useEffect(() => {
-        makeInstanced({
-            group: fbx,
-            castShadow: true,
-            onMaterial: prepareStandardMaterial
-        })
-    }, [fbx])
+    const fbx = useInstancedFbx({
+        url: 'fbx/carts.fbx',
+        onMaterial: prepareStandardMaterial,
+        castShadow: true
+    })
 
     return (
         <>

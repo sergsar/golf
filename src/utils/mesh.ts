@@ -22,34 +22,38 @@ export const makeInstanced = ({ group, castShadow, onMaterial }: PrepareObjectPa
         if (!(object instanceof Mesh)) {
             return
         }
-        if (!geometry[object.geometry.name]) {
-            geometry[object.geometry.name] = object.geometry
-            materials[object.geometry.name] = object.material
-            matrices[object.geometry.name] = []
+        const name = object.geometry.name
+        if (!geometry[name]) {
+            geometry[name] = object.geometry
+            materials[name] = object.material
+            matrices[name] = []
             onMaterial?.(object.material)
         } else {
             const geometryBuffer = object.geometry
             const materialBuffer = object.material
-            object.geometry = geometry[object.geometry.name]
-            object.material = materials[object.geometry.name]
+            object.geometry = undefined
+            object.material = undefined
             if (!Object.values(materials).includes(materialBuffer)) {
                 disposeMaterial(materialBuffer)
             }
             geometryBuffer.dispose()
         }
-        matrices[object.geometry.name].push(object.matrix)
-        object.castShadow = true
+        matrices[name].push(object.matrix)
     })
+    group.children.length = 0
 
-    group.children = []
+    const result = new Group()
+
     Object.entries(geometry).forEach(([key, value]) => {
         const meshMatrices = matrices[key]
         const material = materials[key]
         const instanced = new InstancedMesh(value, material, meshMatrices.length)
         instanced.castShadow = !!castShadow
-        group.add(instanced)
+        result.add(instanced)
         meshMatrices.forEach((matrix, index) => instanced.setMatrixAt(index, matrix))
     })
+
+    return result
 }
 
 export const prepareObject = ({ group, castShadow }: PrepareObjectParams) => {

@@ -1,16 +1,8 @@
-import React, {useEffect} from 'react';
-import {useFBX} from '@react-three/drei';
-import {makeInstanced} from '../utils/mesh';
+import React from 'react';
+import {useInstancedFbx} from '../hooks/useInstancedFbx';
 
 export const Flags: React.FC = () => {
-    const fbx = useFBX('fbx/flags.fbx')
-
-    useEffect(() => {
-        makeInstanced({
-            group: fbx,
-            castShadow: true,
-        })
-    }, [fbx])
+    const fbx = useInstancedFbx({ url: 'fbx/flags.fbx', castShadow: true })
 
     return (
         <>
