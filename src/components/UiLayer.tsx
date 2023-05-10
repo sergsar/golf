@@ -1,12 +1,14 @@
 import {Box} from '@mui/material';
 import {Stats} from './Stats';
-import React from 'react';
+import React, {useMemo} from 'react';
 import {TerrainButton} from './TerrainButton';
-
-
-const stats = false
+import {useSearchParams} from "react-router-dom";
 
 export const UiLayer = () => {
+    const [searchParams] = useSearchParams()
+
+    const stats = useMemo(() => searchParams.get('stats') != null, [searchParams])
+
     return (
         <Box
             component="div"
