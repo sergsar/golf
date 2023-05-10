@@ -18,11 +18,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <StrictMode>
     <CssBaseline />
-    <Suspense fallback={<Loading />}>
-      <ThemeProvider theme={createTheme(themeOptions)}>
-          <App />
-      </ThemeProvider>
-    </Suspense>
+    <ThemeProvider theme={createTheme(themeOptions)}>
+      <App />
+    </ThemeProvider>
   </StrictMode>
 );
 
