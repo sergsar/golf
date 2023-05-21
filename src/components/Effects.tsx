@@ -34,7 +34,7 @@ export const Effects: React.FC<EffectsProps> = ({ disabled, ssao  }) => {
             />
             {ssao ? <SSAO
                 blendFunction={BlendFunction.MULTIPLY}
-                samples={16}
+                samples={4}
                 rings={1}
                 depthAwareUpsampling={true}
                 worldDistanceThreshold={1000}
@@ -53,7 +53,7 @@ export const Effects: React.FC<EffectsProps> = ({ disabled, ssao  }) => {
                 blendFunction={BlendFunction.SCREEN}
                 luminanceThreshold={0.065}
                 luminanceSmoothing={0.1}
-                intensity={2}
+                intensity={1.5}
                 kernelSize={KernelSize.SMALL}
                 resolutionScale={0.5}
             />
