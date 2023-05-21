@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React, {useEffect, useMemo} from 'react';
 import {Effects} from './Effects';
 import {Field} from './Field';
 import {Stage} from './Stage';
@@ -33,7 +33,7 @@ export const Scene: React.FC = () => {
                 <Flags />
                 <Isoline/>
             </Stage>
-            <Effects disabled={0} ssao={0} />
+            <Effects disabled={0} ssao={1} />
             {freeOrbitCamera ? (
                 <FreeOrbitControl
                     makeDefault

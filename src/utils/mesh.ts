@@ -49,6 +49,7 @@ export const makeInstanced = ({ group, castShadow, onMaterial }: PrepareObjectPa
         const material = materials[key]
         const instanced = new InstancedMesh(value, material, meshMatrices.length)
         instanced.castShadow = !!castShadow
+        instanced.matrixAutoUpdate = false
         result.add(instanced)
         meshMatrices.forEach((matrix, index) => instanced.setMatrixAt(index, matrix))
     })

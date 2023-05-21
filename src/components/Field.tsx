@@ -1,14 +1,14 @@
 import React, {useEffect} from 'react';
 import {useFBX, useTexture} from '@react-three/drei';
-import {LinearFilter, LinearMipMapLinearFilter, Mesh, MeshPhongMaterial, sRGBEncoding} from 'three';
+import {LinearFilter, LinearMipMapLinearFilter, Mesh, MeshPhongMaterial, SRGBColorSpace} from 'three';
 
 export const Field: React.FC = () => {
     const fbx = useFBX('fbx/field-mesh.fbx')
     const texture = useTexture('textures/bake-shade.png')
 
     useEffect(() => {
-        (texture as any).channel = 1
-        texture.encoding = sRGBEncoding
+        texture.channel = 2
+        texture.colorSpace = SRGBColorSpace
         texture.generateMipmaps = true
         texture.minFilter = LinearMipMapLinearFilter
         texture.magFilter = LinearFilter
@@ -31,6 +31,7 @@ export const Field: React.FC = () => {
                 })
             }
             object.receiveShadow = true
+            object.matrixAutoUpdate = false
         })
     }, [fbx, texture])
 

@@ -1,7 +1,7 @@
 import React, {Suspense, useMemo} from 'react';
 import {Canvas} from '@react-three/fiber';
 import {Scene} from './Scene';
-import {sRGBEncoding, ReinhardToneMapping, Vector3, PCFShadowMap} from 'three';
+import {ReinhardToneMapping, Vector3, PCFShadowMap, SRGBColorSpace} from 'three';
 import {UiLayer} from './UiLayer';
 import {Delay} from './Delay';
 import {Loading} from './Loading';
@@ -19,7 +19,7 @@ export const GolfPage = () => {
                     gl={{
                         antialias: true,
                         toneMapping: ReinhardToneMapping,
-                        outputEncoding: sRGBEncoding,
+                        outputColorSpace: SRGBColorSpace
                     }}
                     shadows={{ enabled: true, autoUpdate: false, type: PCFShadowMap }}
                     camera={{ position, fov: 50 }}
